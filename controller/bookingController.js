@@ -7,7 +7,7 @@ const handleFactory = require('./handlefactory')
 exports.getCheckoutSession=catchAsync(async(req,res,next)=>{
 
     const tour = await Tour.findById(req.params.tourId)
-console.log('eeeeeeee',req.protocol,req.get("host"))
+// console.log('eeeeeeee',req.protocol,req.get("host"))
     const session = await stripe.checkout.sessions.create({
         payment_method_types:['card'],
         mode:'payment',
@@ -59,10 +59,10 @@ res.status(200).json({
 
 exports.createBookingCheckout = catchAsync(async(req,res,next)=>{
     const {tour,user,price} =req.query
-console.log('booked',tour)
+// console.log('booked',tour)
 
     if(! tour && !user && !price) return next()
-console.log('booked')
+// console.log('booked')
     await Booking.create({tour,price,user})
     res.redirect(req.originalUrl.split('?')[0]);
 })

@@ -79,7 +79,7 @@ res.status(200).json({
 
 exports.protect = catchAsync(async (req, res, next) => {
   // 1) getting token and check if it's there
-console.log('request',req.cookie)
+// console.log('request',req.cookie)
   let token;
   if (
     req.headers.authorization &&

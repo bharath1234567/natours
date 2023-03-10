@@ -36,7 +36,7 @@ const importData = async () => {
     await Review.create(reviews);
     await User.create(users, {validateBeforeSave:false});
 
-    console.log('imported to DB success');
+    // console.log('imported to DB success');
     process.exit();
   } catch (err) {
     console.log(err,'not imported to DB');
@@ -50,7 +50,7 @@ const deleteData = async () => {
     await Review.deleteMany();
 
 
-    console.log('deleted successfully');
+    // console.log('deleted successfully');
     process.exit();
   } catch (err) {
     console.log('not able to delete');
@@ -63,4 +63,4 @@ if (process.argv[2] === '--import') {
   deleteData();
 }
 
-console.log(process.argv);
+// console.log(process.argv);

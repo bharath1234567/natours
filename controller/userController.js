@@ -56,7 +56,7 @@ next()
 })
 
 exports.updateMe = catchAsync(async(req,res,next)=>{
-  console.log(req.body)
+  // console.log(req.body)
   // 1) if password or confirm paswword exists send error
   if(req.body.password || req.body.passwordConfirm){
     return next(new AppError('this route is only for the name email update , please use /updatePassword route',404))

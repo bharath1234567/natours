@@ -8,7 +8,7 @@ const xss = require('xss-clean');
 const hpp = require('hpp');
 const path = require('path');
 const cookieParser = require('cookie-parser')
-
+const compression = require('compression')
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controller/errorController');
 const tourRouter = require('./routes/tourRouter');
@@ -61,13 +61,14 @@ app.use(
   })
 );
 
+app.use(compression())
 
 // Test middlewares
 
-app.use((req, res, next) => {
-  console.log('middleware');
-  next();
-});
+// app.use((req, res, next) => {
+//   console.log('middleware');
+//   next();
+// });
 
 // ROUTES
 
@@ -88,7 +89,6 @@ app.all('*', (req, res, next) => {
   // err.status = 'fail';
   next(new AppError(` the url ${req.originalUrl} not found`, 404));
 });
-
 app.use(globalErrorHandler);
 
 module.exports = app;

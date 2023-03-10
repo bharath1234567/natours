@@ -13,7 +13,7 @@ const tourBooking = document.getElementById('book-tour')
 // DELEGATION
 if (mapBox) {
   const locations = JSON.parse(mapBox.dataset.locations);
-  console.log('aaaaaaaaaaaaaa',locations)
+  // console.log('aaaaaaaaaaaaaa',locations)
   displayMap(locations);
 }
 
@@ -34,7 +34,7 @@ if (userDataForm)
     form.append('name',document.getElementById('name').value)
     form.append('email',document.getElementById('email').value)
     form.append('photo',document.getElementById('photo').files[0])
-    console.log(form)
+    // console.log(form)
 
     updateSettings(form, 'data');
   });
@@ -61,7 +61,7 @@ if (userPasswordForm)
   if(tourBooking){
     
     document.addEventListener('click',(e)=>{
-      console.log('eev',e.target)
+      // console.log('eev',e.target)
       e.target.textContent='processing...'
       const {tourId} = e.target.dataset
       tourBookings(tourId)

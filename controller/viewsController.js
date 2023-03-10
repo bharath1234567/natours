@@ -46,7 +46,7 @@ if (!tour) {
   })
 
   exports.getAccount= catchAsync(async(req,res,next)=>{
-    console.log('aaaacccc')
+    // console.log('aaaacccc')
    return res.status(200).render('account',{
       title:'profile',
 
@@ -58,7 +58,7 @@ if (!tour) {
     const tourIds = await toursBooked.map(el=>el.tour)
 
     const tours = await Tour.find({_id:{$in:tourIds}})
-console.log("tours",tours)
+// console.log("tours",tours)
     res.status(200).render('overview',{
       title:'my-tours',
       tours
