@@ -5,7 +5,6 @@ const Tour = require('../models/tourModel');
 const Booking = require('../models/bookingModel');
 const User = require('../models/userModel')
 const handleFactory = require('./handlefactory')
-
 exports.getCheckoutSession=catchAsync(async(req,res,next)=>{
 
     const tour = await Tour.findById(req.params.tourId)
@@ -13,9 +12,9 @@ exports.getCheckoutSession=catchAsync(async(req,res,next)=>{
     const session = await stripe.checkout.sessions.create({
         payment_method_types:['card'],
         mode:'payment',
-        success_url:`${req.protocol}://${req.get("host")}/my-tours`,
+        // success_url:`${req.protocol}://${req.get("host")}/my-tours`,
         
-        // success_url:`${req.protocol}://${req.get("host")}/my-tours/?tour=${tour._id}&user=${req.user.id}&price=${tour.price}`,
+        success_url:`${req.protocol}://${req.get("host")}/my-tours/?tour=${tour._id}&user=${req.user.id}&price=${tour.price}`,
         cancel_url:`${req.protocol}://${req.get("host")}/tour/${tour.slug}`,
         customer_email: req.user.email,
         client_reference_id:req.params.tourId,
@@ -61,15 +60,15 @@ res.status(200).json({
 })
 })
 
-// exports.createBookingCheckout = catchAsync(async(req,res,next)=>{
-//     const {tour,user,price} =req.query
-// // console.log('booked',tour)
+exports.createBookingCheckout = catchAsync(async(req,res,next)=>{
+    const {tour,user,price} =req.query
+// console.log('booked',tour)
 
-//     if(! tour && !user && !price) return next()
-// // console.log('booked')
-//     await Booking.create({tour,price,user})
-//     res.redirect(req.originalUrl.split('?')[0]);
-// })
+    if(! tour && !user && !price) return next()
+// console.log('booked')
+    await Booking.create({tour,price,user})
+    res.redirect(req.originalUrl.split('?')[0]);
+})
 
 const checkoutSession =async (session)=>{
 const tour =  session.client_reference_id
@@ -108,7 +107,7 @@ exports.webhookCheckout=async(request,response,next)=>{
       }
   
     // Return a 200 response to acknowledge receipt of the event
-    response.send(200);
+    response.send();
 
 
 }

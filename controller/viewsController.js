@@ -53,7 +53,7 @@ exports.getSignupForm = catchAsync(async(req,res,next)=>{
 
   exports.getAccount= catchAsync(async(req,res,next)=>{
     // console.log('aaaacccc')
-    res.status(200).render('account',{
+   return res.status(200).render('account',{
       title:'profile',
 
     })
