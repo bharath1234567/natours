@@ -12,7 +12,7 @@ exports.getOverview = catchAsync(async (req, res,next) => {
 
       tours
     });
-next()
+
 })
 
 exports.getTour = catchAsync(async(req, res,next) => {
@@ -63,6 +63,6 @@ if (!tour) {
       title:'my-tours',
       tours
     })
-next()
+// next()
 
   })

@@ -261,7 +261,7 @@ exports.isLoggedIn = async (req, res, next) => {
 
     if (currentUser.changedPasswordAfter(decoded.iat)) {
       return next(
-        new AppError('user has changed the password please login again')
+        new AppError('user has changed the password please login again',400)
       );
     }
 
