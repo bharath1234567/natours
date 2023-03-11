@@ -9,6 +9,8 @@ const hpp = require('hpp');
 const path = require('path');
 const cookieParser = require('cookie-parser')
 const compression = require('compression')
+const cors = require('cors')
+
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controller/errorController');
 const tourRouter = require('./routes/tourRouter');
@@ -26,7 +28,8 @@ app.set('views', path.join(__dirname, 'views'));
 // GLOBAL MIDLLEWARES
 
 // serving static files
-
+app.use(cors())
+app.options('*',cors())
 app.use(express.static(path.join(__dirname, 'public')));
 
 // set security HTTP headers
