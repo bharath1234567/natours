@@ -45,6 +45,12 @@ if (!tour) {
 
   })
 
+exports.getSignupForm = catchAsync(async(req,res,next)=>{
+  res.status(200).render('signup',{
+    title:'Signup for an account'
+   })
+})
+
   exports.getAccount= catchAsync(async(req,res,next)=>{
     // console.log('aaaacccc')
    return res.status(200).render('account',{

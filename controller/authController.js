@@ -39,7 +39,12 @@ const createSendToken = (user, statusCode,req, res) => {
 };
 
 exports.signup = cathAsync(async (req, res, next) => {
-  const newUser = await User.create(req.body);
+  const newUser = await User.create({
+    name: req.body.name,
+    email: req.body.email,
+    password: req.body.password,
+    passwordConfirm: req.body.passwordConfirm
+  });
   const url = `${req.protocol}://${req.get('host')}/me`;
 await new Email(newUser,url).sendWelcome()
 
@@ -255,15 +260,14 @@ exports.isLoggedIn = async (req, res, next) => {
     const currentUser = await User.findById(decoded.id);
 
     if (!currentUser) {
-      return next(new AppError('user with this token not present', 401));
+      return next();
     }
 
     // 4) check weather user changed password after jwt token issued
 
     if (currentUser.changedPasswordAfter(decoded.iat)) {
       return next(
-        new AppError('user has changed the password please login again',400)
-      );
+            );
     }
 
     // GRANT ACCESS TO USER
