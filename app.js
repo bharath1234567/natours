@@ -77,7 +77,7 @@ app.use(compression())
 // });
 
 // ROUTES
-app.post('/webhook',  express.raw({type: 'application/json'}),  bookingController.webhookCheckout)
+app.post('/checkout-tour',  express.raw({type: 'application/json'}),  bookingController.webhookCheckout)
 
 app.use('/api/v1/tours', tourRouter);
 app.use('/api/v1/users', userRouter);
