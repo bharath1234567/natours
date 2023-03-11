@@ -57,7 +57,7 @@ exports.login = catchAsync(async (req, res, next) => {
 
   //checking email and password fields
   if (!email || !password) {
-    next(new AppError('please enter password or email', 400));
+  return  next(new AppError('please enter password or email', 400));
   }
   //check user exists and password is correct
   const user = await User.findOne({ email }).select('+password');
@@ -96,7 +96,7 @@ exports.protect = catchAsync(async (req, res, next) => {
     token = req.cookies.jwt;
   }
   if (!token) {
-    next(new AppError('please login to get access', 401));
+  return  next(new AppError('please login to get access', 401));
   }
   // 2) verifying the token
 
@@ -117,7 +117,7 @@ exports.protect = catchAsync(async (req, res, next) => {
 
   if (currentUser.changedPasswordAfter(decoded.iat)) {
     return next(
-      new AppError('user has changed the password please login again')
+      new AppError('user has changed the password please login again',404)
     );
   }
 
@@ -266,10 +266,9 @@ exports.isLoggedIn = async (req, res, next) => {
     // 4) check weather user changed password after jwt token issued
 
     if (currentUser.changedPasswordAfter(decoded.iat)) {
-      return next(
-            );
+      return next();
     }
-
+    
     // GRANT ACCESS TO USER
     res.locals.user = currentUser
     return next();
