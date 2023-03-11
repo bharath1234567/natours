@@ -18,7 +18,7 @@ router.get('/', authController. isLoggedIn, viewsController.getOverview);
   router.get('/signup',authController. isLoggedIn,viewsController.getSignupForm)
 
   router.get('/me',authController. protect,viewsController.getAccount)
-  router.get('/my-tours', bookingController.createBookingCheckout,authController. protect,viewsController.myTours)
+  router.get('/my-tours',authController. protect,viewsController.myTours)
 
 
 

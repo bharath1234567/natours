@@ -17,7 +17,8 @@ const tourRouter = require('./routes/tourRouter');
 const userRouter = require('./routes/userRouter');
 const reviewRouter = require('./routes/reviewRouter');
 const viewsRouter = require('./routes/viewsRouter')
-const bookingRouter = require('./routes/bookingRouter')
+const bookingRouter = require('./routes/bookingRouter');
+const bookingController = require('./controller/bookingController');
 const app = express();
 
 app.enable('trust proxy')
@@ -76,6 +77,7 @@ app.use(compression())
 // });
 
 // ROUTES
+app.post('/webhook',  express.raw({type: 'application/json'}),  bookingController.webhookCheckout)
 
 app.use('/api/v1/tours', tourRouter);
 app.use('/api/v1/users', userRouter);
