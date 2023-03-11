@@ -6,7 +6,7 @@ const router = express.Router()
 
 
 
-router.use(authController. isLoggedIn)
+
 
 router.get('/', authController. isLoggedIn, viewsController.getOverview);
   
